@@ -2,6 +2,8 @@ import { MASTER_DB_BASE_URL } from "../../config/clients";
 import PageLayout from "../../layout/PageLayout";
 
 import React, { Component } from "react";
+import { Link, Route, useRouteMatch, useParams } from "react-router-dom";
+import User from "./User";
 
 export default class Users extends Component {
   constructor(props) {
@@ -20,12 +22,25 @@ export default class Users extends Component {
       });
   }
   render() {
-    console.log(this.state);
+    // let match = useRouteMatch();
+    console.log("props", this.props, this.props.location.pathname === "/users");
     return (
-      <PageLayout title={"Home"}>
-        {this.state.users.map((user, idx) => (
-          <div key={idx}>{user.name}</div>
-        ))}
+      <PageLayout title={"Users"}>
+        {this.props.location.pathname === "/users" &&
+          this.state.users.map((user, idx) => {
+            return (
+              <div key={idx}>
+                <Link to={`/users/${user.githubUsername}`}>{user.name}</Link>
+              </div>
+            );
+          })}
+
+        <Route
+          exact
+          path={`/users/:userId`}
+          render={routeprops => <User {...routeprops} users={this.state.users} />}
+        />
+        {/* <Route path={`${this.props.match.url}/company`} component={Company} /> */}
       </PageLayout>
     );
   }

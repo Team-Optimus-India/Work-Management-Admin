@@ -31,21 +31,15 @@ export default class MainLayout extends React.Component {
               </Link>
             </Menu.Item>
             <Menu.Item key="2">
-              <Link to={"/about"}>
-                <Icon type="question-circle" />
-                <span className="menu-item-link">About</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Link to={"/contact"}>
-                <Icon type="contacts" />
-                <span className="menu-item-link">Contact</span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="4">
               <Link to={"/users"}>
                 <Icon type="contacts" />
                 <span className="menu-item-link">Users</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Link to={"/issues"}>
+                <Icon type="contacts" />
+                <span className="menu-item-link">Issues</span>
               </Link>
             </Menu.Item>
           </Menu>
