@@ -2,7 +2,8 @@ import { MASTER_DB_BASE_URL } from "../../config/clients";
 import PageLayout from "../../layout/PageLayout";
 
 import React, { Component } from "react";
-
+import { Card } from "antd";
+import { Row, Col } from "antd";
 import _ from "lodash";
 
 export default class Issues extends Component {
@@ -56,48 +57,52 @@ export default class Issues extends Component {
     console.log(this.state);
     let { repos } = this.state;
     console.log("repos", repos);
-    if (_.isEmpty(repos)) {
-      console.log("reposs", repos);
-      return <div>Hello</div>;
-    }
+
     console.log("reposss", repos);
     return (
       <PageLayout title={"Issues"}>
-        {repos.map((repo, idx) => {
-          console.log("data", repo, repo);
-          return (
-            <div key={idx}>
-              <div>
-                Repository Detail
-                <div>Title - {repo.detail.full_name}</div>
-                <div>Description - {repo.detail.description}</div>
-                <div>Programming language - {repo.detail.language}</div>
-                Issues
-                {repo.issues.map((issue, idx) => {
-                  console.log("issue", issue);
-                  return (
-                    <div key={idx}>
-                      <div>
-                        {issue.number}) Issue Title - {issue.title}
-                      </div>
-                      {issue.assignees.map(user => {
-                        console.log("user", user);
+        <Row>
+          {_.isEmpty(repos) ? (
+            <div>Loading ...</div>
+          ) : (
+            repos.map((repo, idx) => {
+              return (
+                <div key={idx}>
+                  <Col span={8}>
+                    <Card title={repo.detail.full_name} style={{ width: 300 }}>
+                      Repository Detail
+                      <div>Description - {repo.detail.description}</div>
+                      <div>Programming language - {repo.detail.language}</div>
+                      Issues
+                      {repo.issues.map((issue, idx) => {
+                        if (!_.isEmpty(issue.pull_request)) {
+                          return;
+                        }
+                        console.log("issue", issue);
                         return (
-                          <div>
-                            <img src={user.avatar_url} width={50}></img>
-                            <span>{user.login}</span>
+                          <div key={idx} className="padd">
+                            <div>- Issue Title - {issue.title}</div>
+                            {issue.assignees.map(user => {
+                              console.log("user", user);
+                              return (
+                                <div>
+                                  <img src={user.avatar_url} width={50}></img>
+                                  <span>Assignees - {user.login}</span>
+                                </div>
+                              );
+                            })}
+
+                            <div></div>
                           </div>
                         );
                       })}
-
-                      <div></div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
+                    </Card>
+                  </Col>
+                </div>
+              );
+            })
+          )}
+        </Row>
       </PageLayout>
     );
   }

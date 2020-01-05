@@ -19,9 +19,9 @@ export default class MainLayout extends React.Component {
       <Layout style={{ minHeight: "100vh" }}>
         <Sider collapsible collapsed={this.state.collapsed} onCollapse={this.onCollapse}>
           {this.state.collapsed ? (
-            <div className="logo">N</div>
+            <div className="logo">W</div>
           ) : (
-            <div className="logo">Nikhil Kumaran S</div>
+            <div className="logo">Work Measurement Admin</div>
           )}
           <Menu theme="dark" mode="inline">
             <Menu.Item key="1">
@@ -32,13 +32,13 @@ export default class MainLayout extends React.Component {
             </Menu.Item>
             <Menu.Item key="2">
               <Link to={"/users"}>
-                <Icon type="contacts" />
+                <Icon type="user" />
                 <span className="menu-item-link">Users</span>
               </Link>
             </Menu.Item>
             <Menu.Item key="3">
               <Link to={"/issues"}>
-                <Icon type="contacts" />
+                <Icon type="issues-close" />
                 <span className="menu-item-link">Issues</span>
               </Link>
             </Menu.Item>

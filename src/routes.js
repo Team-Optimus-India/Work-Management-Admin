@@ -10,7 +10,11 @@ const AppRouter = () => {
   return (
     <Router>
       <MainLayout>
-        <Route path="/" exact render={routeprops => <Home text="Welcome home" {...routeprops} />} />
+        <Route
+          path="/"
+          exact
+          render={routeprops => <Home text="Work Measurement Admin Application " {...routeprops} />}
+        />
         <Route path="/users" render={routeprops => <Users {...routeprops} />} />
         <Route path="/issues" render={routeprops => <Issues {...routeprops} />} />
       </MainLayout>
