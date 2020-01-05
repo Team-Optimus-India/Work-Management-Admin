@@ -5,6 +5,8 @@ import React, { Component } from "react";
 import { Link, Route } from "react-router-dom";
 import _ from "lodash";
 
+import Activity from "../activity/Activity";
+
 function OwnRepos() {
   return <div>Own repo</div>;
 }
@@ -52,10 +54,21 @@ export default class User extends Component {
     let { details, ownRepos } = user;
     return (
       <div>
-        <img src={details.avatar_url} width={50}></img>
-        <span>{`  ${userFromServer.githubUsername}`}</span>
-        <br />
-        <div>{`  ORGANIZATION --- ${userFromServer.organization}`}</div>
+        {!this.props.location.pathname.includes("/activity") && (
+          <div>
+            <img src={details.avatar_url} width={50}></img>
+            <span>{`  ${userFromServer.githubUsername}`}</span>
+            <br />
+            <div>{`  ORGANIZATION --- ${userFromServer.organization}`}</div>
+            <div>
+              <Link to={`${this.props.location.pathname}/activity`}>View Activity</Link>
+            </div>
+          </div>
+        )}
+        <Route
+          path={`${this.props.match.path}/activity`}
+          render={routeprops => <Activity {...routeprops} />}
+        />
       </div>
     );
   }

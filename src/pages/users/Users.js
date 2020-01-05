@@ -36,7 +36,6 @@ export default class Users extends Component {
           })}
 
         <Route
-          exact
           path={`/users/:userId`}
           render={routeprops => <User {...routeprops} users={this.state.users} />}
         />
